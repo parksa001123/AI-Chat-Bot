@@ -1,6 +1,5 @@
 streamlit
-openai
+openai>=1.0.0
 pandas
 plotly
-numpy
 streamlit-option-menu
