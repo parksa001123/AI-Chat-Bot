@@ -396,6 +396,8 @@ elif selected == "AI 코치":
     2. 추천 프로그램
     3. 추천 이유
     4. 성장 방향 제안
+
+    항상 친절하고 전문적으로 한국어로 답변하세요.
     """
 
     if len(st.session_state.messages) == 0:
@@ -422,13 +424,16 @@ elif selected == "AI 코치":
 
         with st.chat_message("assistant"):
 
-            stream = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=st.session_state.messages,
-                stream=True
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=st.session_state.messages
             )
 
-            response = st.write_stream(stream)
+            answer = response.choices[0].message.content
+
+            st.markdown(answer)
+
+            response = answer
 
         st.session_state.messages.append({
             "role":"assistant",
